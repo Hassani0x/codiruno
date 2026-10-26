@@ -2,19 +2,40 @@ import { newQuickJSWASMModuleFromVariant } from 'quickjs-emscripten-core';
 import RELEASE_SYNC from '@jitl/quickjs-wasmfile-release-sync';
 
 export const LIMITS = Object.freeze({ timeMs: 5000, memory: 64 * 1024 * 1024, source: 65536, input: 16384, output: 32768 });
-export async function execute({ language, code, stdin = '', visualize = false }, { python = '', stdlib = '', transpile, quickJS } = {}) {
+// A prepared interpreter is pristine and can be consumed exactly once.
+// Never return a runtime that has executed user code to this pool.
+export function preparePython({quickJS, python, stdlib}) {
+  const runtime = quickJS.newRuntime();
+  runtime.setMemoryLimit(LIMITS.memory);
+  runtime.setMaxStackSize(512 * 1024);
+  const deadline = Date.now() + 10000;
+  runtime.setInterruptHandler(() => Date.now() > deadline);
+  const vm = runtime.newContext();
+  let available = true;
+  const dispose = () => { if (available) { available = false; vm.dispose(); runtime.dispose(); } };
+  try {
+    for (const source of [python, stdlib]) {
+      const result = vm.evalCode(source);
+      if (result.error) { const error = vm.dump(result.error); result.error.dispose(); throw new Error(error.message || 'Python initialization failed'); }
+      result.value.dispose();
+    }
+  } catch (error) { dispose(); throw error; }
+  return {dispose, take() { if (!available) throw new Error('Prepared Python runtime already consumed'); available = false; return {runtime, vm}; }};
+}
+export async function execute({ language, code, stdin = '', visualize = false }, { python = '', stdlib = '', transpile, quickJS, preparedPython } = {}) {
   const started = performance.now();
   if (!['python', 'javascript', 'typescript'].includes(language)) throw new Error('Unsupported language.');
   if (typeof code !== 'string' || typeof stdin !== 'string') throw new Error('Code and input must be text.');
   if (new TextEncoder().encode(code).length > LIMITS.source) throw new Error('Code exceeds the 64 KB limit.');
   if (new TextEncoder().encode(stdin).length > LIMITS.input) throw new Error('Input exceeds the 16 KB limit.');
   const Q = quickJS || await newQuickJSWASMModuleFromVariant(RELEASE_SYNC);
-  const runtime = Q.newRuntime();
+  const prepared = language === 'python' ? preparedPython?.take() : null;
+  const runtime = prepared?.runtime || Q.newRuntime();
   runtime.setMemoryLimit(LIMITS.memory);
   runtime.setMaxStackSize(512 * 1024);
   let deadline = Date.now() + 10000;
   runtime.setInterruptHandler(() => Date.now() > deadline);
-  const vm = runtime.newContext();
+  const vm = prepared?.vm || runtime.newContext();
   let stdout = '', stderr = '', status = 'success', overflow = false;
   const trace = [];
   let traceTruncated = false;
@@ -57,7 +78,7 @@ export async function execute({ language, code, stdin = '', visualize = false },
     `, 'codiruno-runtime.js');
     if (language === 'python') {
       if (!python || !stdlib) throw new Error('Python runtime is unavailable. Reload and try again.');
-      evalText(python, 'skulpt.js'); evalText(stdlib, 'stdlib.js');
+      if (!prepared) { evalText(python, 'skulpt.js'); evalText(stdlib, 'stdlib.js'); }
       evalText(`Sk.configure({__future__: Sk.python3, output: text => __write(String(text).slice(0, ${LIMITS.output + 1}), 0),
         read: path => { if (!Object.hasOwn(Sk.builtinFiles.files, path)) throw new Error('Module not available: ' + path); return Sk.builtinFiles.files[path]; },
         inputfun: prompt => { if(prompt) __write(String(prompt).slice(0, ${LIMITS.output + 1}), 0); const v = __read(); if(v === null) throw new Error('End of input. Add a line to Program input.'); return v; }, inputfunTakesPrompt: true,
