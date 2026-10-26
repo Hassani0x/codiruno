@@ -1,0 +1,164 @@
+[
+  {
+    "id": "python",
+    "label": "Python",
+    "sourceUrl": "https://www.programiz.com/python-programming/online-compiler/",
+    "icon": "python",
+    "path": "/python-programming/online-compiler/",
+    "file": "main.py",
+    "code": "# Online Python compiler (interpreter)\n# Write and run Python online using this editor.\n\nprint(\"What does the Visualize button do?\")"
+  },
+  {
+    "id": "r",
+    "label": "R",
+    "sourceUrl": "https://www.programiz.com/r/online-compiler/",
+    "icon": "r",
+    "path": "/r/online-compiler/",
+    "file": "main.r",
+    "code": "# Online R compiler\nmessage(\"Hello, World!\")"
+  },
+  {
+    "id": "sql",
+    "label": "SQL",
+    "sourceUrl": "https://www.programiz.com/sql/online-compiler/",
+    "icon": "sql",
+    "path": "/sql/online-compiler/",
+    "file": "main.sql",
+    "code": "-- Online SQL editor\nCREATE TABLE greetings (message TEXT);\nINSERT INTO greetings VALUES ('Hello, World!');\nSELECT * FROM greetings;"
+  },
+  {
+    "id": "html",
+    "label": "HTML/CSS",
+    "sourceUrl": "https://www.programiz.com/html/online-compiler/",
+    "icon": "html",
+    "path": "/html/online-compiler/",
+    "file": "index.html",
+    "code": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Codiruno</title>\n  <style>body { font-family: sans-serif; padding: 24px; }</style>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>Write HTML and CSS in this editor.</p>\n</body>\n</html>"
+  },
+  {
+    "id": "java",
+    "label": "Java",
+    "sourceUrl": "https://www.programiz.com/java-programming/online-compiler/",
+    "icon": "java",
+    "path": "/java-programming/online-compiler/",
+    "file": "Main.java",
+    "code": "// Online Java Compiler\nclass Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}"
+  },
+  {
+    "id": "kotlin",
+    "label": "Kotlin",
+    "sourceUrl": "https://www.programiz.com/kotlin-programming/online-compiler/",
+    "icon": "kotlin",
+    "path": "/kotlin-programming/online-compiler/",
+    "file": "main.kt",
+    "code": "fun main() {\n    println(\"Hello, World!\")\n}"
+  },
+  {
+    "id": "c",
+    "label": "C",
+    "sourceUrl": "https://www.programiz.com/c-programming/online-compiler/",
+    "icon": "c",
+    "path": "/c-programming/online-compiler/",
+    "file": "main.c",
+    "code": "// Online C compiler\n#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}"
+  },
+  {
+    "id": "cpp",
+    "label": "C++",
+    "sourceUrl": "https://www.programiz.com/cpp-programming/online-compiler/",
+    "icon": "cpp",
+    "path": "/cpp-programming/online-compiler/",
+    "file": "main.cpp",
+    "code": "// Online C++ compiler\n#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": "csharp",
+    "label": "C#",
+    "sourceUrl": "https://www.programiz.com/csharp-programming/online-compiler/",
+    "icon": "csharp",
+    "path": "/csharp-programming/online-compiler/",
+    "file": "main.cs",
+    "code": "// Online C# compiler\nusing System;\nclass HelloWorld {\n    static void Main() {\n        Console.WriteLine(\"Hello, World!\");\n    }\n}"
+  },
+  {
+    "id": "javascript",
+    "label": "JavaScript",
+    "sourceUrl": "https://www.programiz.com/javascript/online-compiler/",
+    "icon": "javascript",
+    "path": "/javascript/online-compiler/",
+    "file": "main.js",
+    "code": "// Online Javascript Editor for free\n// Write, Edit and Run your Javascript code using JS Online Compiler\n\nconsole.log(\"Hello, World!\");"
+  },
+  {
+    "id": "typescript",
+    "label": "TypeScript",
+    "sourceUrl": "https://www.programiz.com/typescript/online-compiler/",
+    "icon": "typescript",
+    "path": "/typescript/online-compiler/",
+    "file": "main.ts",
+    "code": "// Online Typescript Editor for free\nconst message: string = \"Hello, World!\";\nconsole.log(message);"
+  },
+  {
+    "id": "golang",
+    "label": "Go",
+    "sourceUrl": "https://www.programiz.com/golang/online-compiler/",
+    "icon": "golang",
+    "path": "/golang/online-compiler/",
+    "file": "main.go",
+    "code": "// Online Go compiler\npackage main\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}"
+  },
+  {
+    "id": "rust",
+    "label": "Rust",
+    "sourceUrl": "https://www.programiz.com/rust/online-compiler/",
+    "icon": "rust",
+    "path": "/rust/online-compiler/",
+    "file": "main.rs",
+    "code": "// Online Rust compiler\nfn main() {\n    println!(\"Hello, World!\");\n}"
+  },
+  {
+    "id": "scala",
+    "label": "Scala",
+    "sourceUrl": "https://www.programiz.com/scala/online-compiler/",
+    "icon": "scala",
+    "path": "/scala/online-compiler/",
+    "file": "main.scala",
+    "code": "object Main extends App {\n    println(\"Hello, World!\")\n}"
+  },
+  {
+    "id": "dart",
+    "label": "Dart",
+    "sourceUrl": "https://www.programiz.com/dart/online-compiler/",
+    "icon": "dart",
+    "path": "/dart/online-compiler/",
+    "file": "main.dart",
+    "code": "void main() {\n    print(\"Hello, World!\");\n}"
+  },
+  {
+    "id": "ruby",
+    "label": "Ruby",
+    "sourceUrl": "https://www.programiz.com/ruby/online-compiler/",
+    "icon": "ruby",
+    "path": "/ruby/online-compiler/",
+    "file": "main.rb",
+    "code": "# Online Ruby compiler\nputs \"Hello, World!\""
+  },
+  {
+    "id": "php",
+    "label": "PHP",
+    "sourceUrl": "https://www.programiz.com/php/online-compiler/",
+    "icon": "php",
+    "path": "/php/online-compiler/",
+    "file": "main.php",
+    "code": "<?php\n// Online PHP compiler\necho \"Hello, World!\";\n?>"
+  },
+  {
+    "id": "swift",
+    "label": "Swift",
+    "sourceUrl": "https://www.programiz.com/swift/online-compiler/",
+    "icon": "swift",
+    "path": "/swift/online-compiler/",
+    "file": "main.swift",
+    "code": "// Online Swift compiler\nprint(\"Hello, World!\")"
+  }
+]
