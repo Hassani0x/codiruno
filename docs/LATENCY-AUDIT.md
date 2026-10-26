@@ -45,3 +45,11 @@ Do not fake speed with saved outputs, disable isolation, race duplicate jobs aga
 - Pyodide usage and Workers: https://pyodide.org/en/stable/usage/index.html
 
 Cloudflare documents typical container cold starts of 1–3 seconds, varying with image/startup work. Moving compilers to cold-starting containers alone therefore does not guarantee instant execution.
+
+## Concrete free browser-runtime candidates
+
+- Ruby: official ruby.wasm (https://github.com/ruby/ruby.wasm). Use a restricted WASI host; the convenient browser JS bridge exposes capabilities and must not be enabled for untrusted code.
+- R: webR (https://docs.r-wasm.org/webr/latest/downloading.html). Runtime binaries can be self-hosted, but they must be downloaded and initialized. Cold-download cost and device memory require measurement.
+- PHP: @php-wasm/web from WordPress Playground (https://developer.wordpress.org/playground/developers/architecture/browser-concepts/). Worker execution is supported; a compiler-only integration must restrict network, filesystem persistence and output, rather than embed the full WordPress application.
+
+These are researched candidates, not installed or performance-verified Codiruno implementations. They are more concrete next experiments than promising all languages can move into the browser unchanged.
