@@ -4,14 +4,12 @@ export const COMPILER_IDS = Object.freeze({
   typescript: 'typescript-5.6.2', swift: 'swift-6.0.1', go: 'go-1.23.2',
   rust: 'rust-1.82.0', php: 'php-8.3.12', r: 'r-4.4.1', ruby: 'ruby-4.0.2', sql: 'sqlite-3.46.1', scala: 'scala-2.13.15',
 });
-export const REMOTE_LIMITS = Object.freeze({ source: 65536, input: 16384, output: 32768, requestMs: 90000 });
+export const REMOTE_LIMITS = Object.freeze({ output: 32768, requestMs: 90000 });
 const encoder = new TextEncoder();
 
 export async function executeRemote({ compiler, code, stdin = '' }, signal) {
   if (!Object.values(COMPILER_IDS).includes(compiler)) throw new Error('Unsupported remote compiler.');
   if (typeof code !== 'string' || typeof stdin !== 'string') throw new Error('Code and input must be text.');
-  if (encoder.encode(code).length > REMOTE_LIMITS.source) throw new Error('Code exceeds the 64 KB limit.');
-  if (encoder.encode(stdin).length > REMOTE_LIMITS.input) throw new Error('Input exceeds the 16 KB limit.');
   const started = performance.now();
   const controller = new AbortController();
   let timedOut = false;

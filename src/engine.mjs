@@ -1,7 +1,7 @@
 import { newQuickJSWASMModuleFromVariant } from 'quickjs-emscripten-core';
 import RELEASE_SYNC from '@jitl/quickjs-wasmfile-release-sync';
 
-export const LIMITS = Object.freeze({ timeMs: 5000, memory: 64 * 1024 * 1024, source: 65536, input: 16384, output: 32768 });
+export const LIMITS = Object.freeze({ timeMs: 5000, memory: 64 * 1024 * 1024, output: 32768 });
 // A prepared interpreter is pristine and can be consumed exactly once.
 // Never return a runtime that has executed user code to this pool.
 export function preparePython({quickJS, python, stdlib}) {
@@ -26,8 +26,6 @@ export async function execute({ language, code, stdin = '', visualize = false },
   const started = performance.now();
   if (!['python', 'javascript', 'typescript'].includes(language)) throw new Error('Unsupported language.');
   if (typeof code !== 'string' || typeof stdin !== 'string') throw new Error('Code and input must be text.');
-  if (new TextEncoder().encode(code).length > LIMITS.source) throw new Error('Code exceeds the 64 KB limit.');
-  if (new TextEncoder().encode(stdin).length > LIMITS.input) throw new Error('Input exceeds the 16 KB limit.');
   const Q = quickJS || await newQuickJSWASMModuleFromVariant(RELEASE_SYNC);
   const prepared = language === 'python' ? preparedPython?.take() : null;
   const runtime = prepared?.runtime || Q.newRuntime();

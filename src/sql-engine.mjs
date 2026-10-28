@@ -1,6 +1,6 @@
 export function executeSQL(code, SQL) {
   const started = performance.now();
-  if (typeof code !== 'string' || new TextEncoder().encode(code).length > 65536) throw new Error('SQL source exceeds the 64 KB limit.');
+  if (typeof code !== 'string') throw new Error('SQL source must be text.');
   const db = new SQL.Database();
   let stdout = '', status = 'success', stderr = '';
   try {

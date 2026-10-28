@@ -25,6 +25,6 @@ Deploy only the contents of `dist/` to Cloudflare Workers static assets. The bui
 - C, C++, Java, C#, Go, Rust, Scala, R, Ruby, PHP and Swift use Wandbox's independent public API. Code and input are sent to that provider and may be logged. Never submit secrets.
 - Kotlin and Dart execution are not connected. Swift's provider currently fails to start; no successful execution is claimed.
 
-Local execution has time, memory, source and output limits. Remote speed, availability and isolation depend on Wandbox. No simulated results are used. See [execution details](docs/WANDBOX.md) and [performance checks](docs/PERFORMANCE.md).
+Codiruno does not impose fixed source or input size caps. Local execution retains time, memory and output safeguards; browser storage and external providers have their own limits. Remote speed, availability and isolation depend on Wandbox. No simulated results are used. See [execution details](docs/WANDBOX.md) and [performance checks](docs/PERFORMANCE.md).
 
 The compiler/editor layout references Programiz. Codiruno is independent and does not use Programiz's backend. See [asset attribution](docs/ASSETS.md) for third-party assets and [logo](docs/BRAND.md) for the original Codiruno mark.
